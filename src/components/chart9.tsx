@@ -53,6 +53,7 @@ export const Chart9 = () => {
     <div className="年龄段-图3">
       <h3>犯罪年龄趋势图</h3>
       <div ref={divRef} className="chart">
+
       </div>
     </div>
   );

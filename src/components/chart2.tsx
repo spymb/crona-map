@@ -59,10 +59,10 @@ export const Chart2 = () => {
             normal: {
               color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
                 offset: 0,
-                color: '#2034f9'
+                color: '#2034F9'
               }, {
                 offset: 1,
-                color: '#04a1ff'
+                color: '#04A1FF'
               }]),
             }
           }
@@ -75,16 +75,17 @@ export const Chart2 = () => {
             normal: {
               color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
                 offset: 0,
-                color: '#b92ae8'
+                color: '#B92AE8'
               }, {
                 offset: 1,
-                color: '#6773e7'
+                color: '#6773E7'
               }]),
             }
           }
         }
       ]
     }));
+
   };
   useEffect(() => {
     myChart.current = echarts.init(divRef.current);
@@ -96,8 +97,8 @@ export const Chart2 = () => {
       <h2>案件破获排名</h2>
       <div ref={divRef} className="chart"/>
       <div className="legend">
-        <span className="first"> 破案排名1</span>
-        <span className="second"> 破案排名2</span>
+        <span className="first"/> 破案排名1
+        <span className="second"/> 破案排名2
       </div>
     </div>
   );

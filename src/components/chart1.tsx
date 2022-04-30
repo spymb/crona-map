@@ -25,6 +25,7 @@ export const Chart1 = () => {
           }
         },
       },
+
       yAxis: {
         splitLine: {show: false},
         axisLine: {
