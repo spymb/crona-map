@@ -50,6 +50,7 @@
       background: #0f113a;
 
       &::before {
+        pointer-events: none;
         content: '';
         position: absolute;
         left: 0;
@@ -268,8 +269,10 @@
 
     .战果, .作案手段 {
       padding: 0 px(24);
+
       > table {
-        width: 100%; table-layout: fixed;
+        width: 100%;
+        table-layout: fixed;
         margin-top: px(25);
         border-collapse: collapse;
 
@@ -294,6 +297,7 @@
         }
       }
     }
+
     .作案手段 {
       > table {
         tbody {
@@ -303,6 +307,7 @@
         }
       }
     }
+
     .破获排名 {
       height: px(423);
 
