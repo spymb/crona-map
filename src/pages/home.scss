@@ -266,9 +266,11 @@
       }
     }
 
-    .战果 {
+    .战果, .作案手段 {
+      padding: 0 px(24);
       > table {
-        margin-top: px(38);
+        width: 100%; table-layout: fixed;
+        margin-top: px(25);
         border-collapse: collapse;
 
         th, td {
@@ -292,7 +294,15 @@
         }
       }
     }
-
+    .作案手段 {
+      > table {
+        tbody {
+          td {
+            height: px(26);
+          }
+        }
+      }
+    }
     .破获排名 {
       height: px(423);
 
