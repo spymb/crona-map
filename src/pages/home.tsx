@@ -1,42 +1,38 @@
 import React from 'react';
 import './home.scss';
-import headerBg from '../images/header.png';
-import {Chart1} from '../components/chart1';
 import {Chart2} from '../components/chart2';
+import {Chart1} from '../components/chart1';
+import {Chart10} from '../components/chart10';
+import {Chart7} from '../components/chart7';
+import {Chart8} from '../components/chart8';
+import {Chart9} from '../components/chart9';
 import {Chart3} from '../components/chart3';
 import {Chart4} from '../components/chart4';
 import {Chart5} from '../components/chart5';
 import {Chart6} from '../components/chart6';
-import {Chart7} from '../components/chart7';
-import {Chart8} from '../components/chart8';
-import {Chart9} from '../components/chart9';
-import {Chart10} from '../components/chart10';
-import {Chart11} from '../components/chart11';
-import {Chart12} from '../components/chart12';
-import {Chart13} from '../components/chart13';
-import {Chart14} from '../components/chart14';
+import {Clock} from '../components/clock';
 
 export const Home = () => {
   const year = new Date().getFullYear();
   return (
     <div className="home">
-      <header style={{backgroundImage: `url(${headerBg})`}}/>
+      <header>
+        <Clock/>
+        <span>新冠疫情监控平台</span>
+        <div className="info">
+          数据更新至2022.4.30
+        </div>
+      </header>
       <main>
-        <section className="section1">
+        <section className="section3">
           <Chart1/>
           <Chart2/>
-        </section>
-        <section className="section2">
           <Chart3/>
-          <Chart4/>
-        </section>
-        <section className="bordered section3">
-          <Chart5/>
         </section>
         <section className="section4">
-          <Chart6/>
+          <Chart10/>
           <div className="bordered 年龄段">
-            <h2>犯罪人员年龄段分布</h2>
+            <h2>确诊人员年龄段分布</h2>
             <div className="charts">
               <Chart7/>
               <Chart8/>
@@ -45,28 +41,26 @@ export const Home = () => {
           </div>
         </section>
         <section className="section5">
-          <div className="bordered row1 案发类型">
-            <h2>案发类型统计</h2>
+          <div className="bordered row1 xinzeng">
+            <h2>昨日本土新增省市TOP10</h2>
             <div className="charts">
-              <Chart10/>
-              <Chart11/>
+              <Chart4/>
             </div>
           </div>
-          <div className="bordered row2 案发街道">
-            <h2>案发街道统计</h2>
+          <div className="bordered row2 leiji">
+            <h2>境外输入累计确诊省TOP10</h2>
             <div className="charts">
-              <Chart12/>
-              <Chart13/>
+              <Chart5/>
             </div>
           </div>
-          <div className="bordered row3 作案手段">
-            <h2>作案手段分析</h2>
-            <Chart14/>
+          <div className="bordered row3 fengxian">
+            <h2>各省市中高风险地区占比</h2>
+            <Chart6/>
           </div>
         </section>
       </main>
       <footer>
-        &copy; 饥人谷 2020-{year}
+        &copy; SPYM {year}
       </footer>
     </div>
   );

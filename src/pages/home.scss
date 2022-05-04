@@ -1,31 +1,89 @@
 @import "../shared/helper";
 
 %legend {
-  height: px(40); display: flex; align-items: center;
-  justify-content: center; flex-wrap: wrap; padding-right: px(10);
-  > span {display: inline-block; width: px(16); height: px(10);
-    border-radius: px(2); margin: 0 px(10);}
+  height: px(55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-right: px(10);
+
+  > span {
+    display: inline-block;
+    width: px(10);
+    height: px(10);
+    border-radius: px(2);
+    margin: 0 px(10);
+  }
 }
 
-.home {flex: 1;display: flex;flex-direction: column;
-  background: #010310; color: white;
+.home {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
   font-size: px(16);
+  box-shadow: 0 0 10px 1px #103852;
+
   > header {
-    height: px(99);
-    background-size: cover;
-    width: px(2420);
-    margin: 0 auto;
+    border: 1px solid #1d393d;
+    height: px(100);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #eee;
+    font-size: px(45);
+    background: linear-gradient(90deg, rgba(8, 24, 35, 1) 0%, rgba(0, 0, 0, 0) 50%, rgba(8, 24, 35, 1) 100%);
+    position: relative;
+    text-shadow: 0 0 px(40) #1d393d;
+
+    &::before {
+      content: '';
+      position: absolute;
+      height: 1px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(90deg, rgba(16, 48, 65, 1) 0%, rgba(0, 0, 0, 0) 25%, rgba(26, 58, 75, 1) 50%, rgba(0, 0, 0, 0) 75%, rgba(16, 48, 65, 1) 100%);
+    }
+
+    .clock {
+      position: absolute;
+      left: px(80);
+      color: #6d929d;
+
+      > div {
+        &:first-child {
+          font-size: px(25);
+          margin-bottom: px(1);
+        }
+
+        &:nth-child(2) {
+          font-size: px(20)
+        }
+      }
+    }
+    .info {
+      position: absolute;
+      right: px(70);
+      font-size: px(9);
+      color: #6d929d;
+      padding: 0 px(13);
+    }
   }
+
   > footer {
     height: px(68);
-    border: 1px solid #0d2d59;
+    border: 1px solid #1d393d;
     margin: px(20) 0 1px;
     border-radius: 4px;
-    background: #0c0d2b;
+    background: linear-gradient(90deg, rgba(8, 24, 35, 1) 0%, rgba(0, 0, 0, 0) 50%, rgba(8, 24, 35, 1) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
   }
+
   > main {
     width: px(2420);
     margin: 0 auto;
@@ -33,75 +91,75 @@
     flex: 1;
     display: grid;
     grid-template:
-      "box1 box2 box4 box5" 755fr
-      "box3 box3 box4 box5" 363fr / 366fr 361fr 811fr 747fr;
+      "box3 box4 box5" 1118fr / 680fr 945fr 680fr;
     grid-column-gap: px(28);
     grid-row-gap: px(28);
-    > section {text-align: center;}
+
+    > section {
+      text-align: center;
+    }
+
     .bordered {
-      border: 1px solid #0764bc;
+      font-weight: bolder;
       border-radius: 4px;
       position: relative;
-      box-shadow: 0 0 2px 0 #0e325f, inset 0 0 2px 0 #0e325f;
-      background: #0f113a;
+      box-shadow: 0 0 1px 0 #1d393d, inset 0 0 1px 0 #1d393d;
+      border: 1px solid #1d393d;
+
       &::before {
         pointer-events: none;
-        content: '';position: absolute;left: 0;right: 0;bottom: 0;top: 0;
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
         border-radius: 4px;
-        box-shadow: 17px 0 0 -16px #0e325f,
-        -17px 0 0 -16px #0e325f,
-        0 17px 0 -16px #0e325f,
-        0 -17px 0 -16px #0e325f,
-        9px 0 0 -8px #0d4483,
-        -9px 0 0 -8px #0d4483,
-        0 9px 0 -8px #0d4483,
-        0 -9px 0 -8px #0d4483,;
       }
     }
-    > .section1 {
-      grid-area: box1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    > .section2 {
-      grid-area: box2;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+
     > .section3 {
       grid-area: box3;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
+
     > .section4 {
       grid-area: box4;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
+
     > .section5 {
       grid-area: box5;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+
       > .row1 {
         height: px(317);
       }
+
       > .row2 {
         height: px(317);
       }
+
       > .row3 {
         height: px(455);
       }
     }
-    .管辖统计, .破获排名, .发案趋势, .案发时段, .战果, .籍贯, .年龄段, .案发类型, .案发街道, .作案手段 {
+
+    .qushi, .summary, .map, .年龄段, .xinzeng, .leiji, .fengxian {
       height: px(315);
       display: flex;
       flex-direction: column;
       align-items: center;
-      h2 {
+
+      h2 {;
         flex-shrink: 0;
-        border: 1px solid #0a5299;
+        border: 1.5px solid #1d393d;
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
         font-size: px(22);
@@ -109,77 +167,196 @@
         padding: px(10) px(28);
         text-shadow: 0 0 px(3) white;
       }
+
       .charts {
-        width: 100%;flex: 1;
+        width: 100%;
+        flex: 1;
         display: flex;
       }
+
       .chart {
         flex: 1;
         width: 100%;
       }
     }
-    .发案趋势, .案发时段 {
-      height: px(363);
+
+    .qushi{
+      height: px(350);
+      > .chart {
+        padding: px(10) px(20);
+      }
     }
+
     .chart11, .chart12 {
-      flex: 1;display: flex; flex-direction: column;
-      > .chart {display: flex;
-        > .main {flex: 1}
-      }
-      .legend {@extend %legend;}
-    }
-    .年龄段 {display: flex;flex-direction: column;
-      height: px(363);
-      > .charts {
-        padding: px(30);
-      }
-      &-图1, &-图2, &-图3 {
-        flex: 1;display: flex; flex-direction: column;
-      }
-      &-图1, &-图2 {
-        .legend { @extend %legend;
-          .male {background: #33a4fa;}
-          .female {background: #8d70f8;}
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      > .chart {
+        display: flex;
+
+        > .main {
+          flex: 1
         }
+      }
+
+      .legend {
+        @extend %legend;
+      }
+    }
+
+    .年龄段 {
+      display: flex;
+      flex-direction: column;
+      height: px(380);
+
+      > .charts {
+        padding: px(15);
+      }
+
+      &-图1, &-图2, &-图3 {
+        border: 1px solid #1e393d;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      &-图1, &-图2 {
+        margin-right: px(40);
+        .legend {
+          @extend %legend;
+
+          .male {
+            background: #33a4fa;
+          }
+
+          .female {
+            background: #F46064;
+          }
+        }
+
         .chart {
           position: relative;
           display: flex;
-          > .main {flex: 1;}
-          > .text {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            color: #33a4fa; font-size: px(40); text-shadow: 0 0 px(20) #33a4fa;font-weight: bold;}
+
+          > .main {
+            flex: 1;
+          }
+
+          > .text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #8d70f8;
+            font-size: px(40);
+            text-shadow: 0 0 px(20) #8d70f8;
+            font-weight: bold;
+          }
         }
       }
       &-图2 {
-        width: px(290); flex-shrink: 0;
+        width: px(290);
+        flex-shrink: 0;
+
         .legend {
           justify-content: flex-start;
         }
       }
+
       &-图3 {
-        border: 1px solid #08397d;
-        h3 {font-size: px(20); color: #7ab6db; margin-top: px(6);}
+
+        h3 {
+          font-size: px(20);
+          margin-top: px(15);
+        }
       }
     }
-    .籍贯 {
-      height: px(753); background: transparent;
+
+    .map {
+      height: px(740);
+      background: transparent;
+
       > .wrapper {
-        position: relative;width: 100%;flex: 1;
-        display: flex; flex-direction: column;
-        .chart {flex: 1;}
-        .legend {
-          position: absolute;top: px(40);left: px(20);display: flex;
-          align-items: center;
-          font-size: px(22); padding: px(20) px(10) px(20) 0;
-          border-radius: 0;
-          .icon {
-            margin: 0 px(10);
-            display: inline-block;
-            width: px(16);
-            height: px(16);
+        position: relative;
+        width: 100%;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        .ring {
+          border: 1px solid #0c2939;
+          position: absolute;
+          bottom: px(50);
+          left: px(48);
+          width: px(64);
+          height: px(64);
+          border-bottom: none;
+          border-radius: 50%;
+          overflow: hidden;
+          animation: spin infinite 5s linear;
+
+          > .radar {
+            border: 2px solid #103142;
+            position: absolute;
+            width: px(54);
+            height: px(54);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             border-radius: 50%;
-            background: #1cecd9;
+
+            &::before {
+              content: '';
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              width: px(28);
+              height: px(28);
+              border: 2px solid #082132;
+              border-radius: 50%;
+            }
+
+            &::after {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 50%;
+              transform: translateX(-50%);
+              width: px(2);
+              height: px(24);
+              z-index: 1;
+              background: #007cc0;
+              border-radius: 50%;
+              box-shadow: 0 0 5px 1px #0094e4,
+              -3px -10px 5px 1px #0094e4,
+              -7px -15px 10px 1px #0094e4,
+              -3px -3px 10px 1px #0094e4,
+              -7px -7px 20px 1px #0094e4,
+              -11px -11px 30px 1px #0094e4,
+              -11px -11px 40px 1px #0094e4,
+              -11px -11px 30px 1px #0094e4,
+              -11px -11px 30px 1px #0094e4;
+            }
           }
         }
+
+        @keyframes spin {
+          from {
+            transform: rotate(0);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+
+        .left-notes {
+          position: absolute;
+          bottom: px(10);
+          left: px(10);
+        }
+
         .notes {
           position: absolute;
           bottom: px(10);
@@ -187,56 +364,95 @@
         }
       }
     }
-    .战果, .作案手段 {
-      padding: 0 px(24);
+
+    .summary {
+      height: px(400);
+      padding: 0 px(20);
+
       > table {
-        width: 100%; table-layout: fixed;
-        margin-top: px(25);
+        text-align: center;
+        width: 100%;
+        table-layout: fixed;
+        margin-top: px(15);
         border-collapse: collapse;
+
         th, td {
-          border: 1px solid #1a3671;
+          border: 1px solid #1d393d;
         }
+
         thead {
           th {
-            height: px(70);
-            box-shadow: inset 0 0 px(60) 0 #1f3d85;
-          }
-        }
-        tbody {
-          td {height: px(50); width: px(84);
-            background: #1c2456;
+            padding: px(5);
+            font-size: px(10);
+            height: px(25);
+            box-shadow: inset 0 0 px(60) 0 #1d393d;
           }
 
+          td {
+            font-size: px(32);
+            height: px(52);
+            width: px(84);
+            background: rgba(31, 59, 70, 0.35);
+            > span {
+              display: inline-block;
+              font-size: px(1);
+              color:wheat;
+            }
+          }
+
+          .lastTr > td {
+            padding: px(5);
+          }
+          .lastTr > td >  {
+            padding: px(5);
+          }
+
+          .f11 {
+            color: #a48256
+          }
+          .f12 {
+            color: #c96161
+          }
+          .f13 {
+            color: #ffa200
+          }
+          .f14 {
+            color: #8a38a1
+          }
+          .f21 {
+            color: #b8540e
+          }
+          .f22 {
+            color: #ff3535
+          }
+          .f23 {
+            color: #fe9885
+          }
+          .f24 {
+            color: #a36fff
+          }
+          .f31 {
+            color: #b10000
+          }
+          .f32 {
+            color: #fe6b22
+          }
+          .f33 {
+            color: #13b593
+          }
+          .f34 {
+            color: #666666
+          }
         }
       }
     }
-    .作案手段 {
+
+    .fengxian {
       > table {
         tbody {
           td {
             height: px(26);
           }
-        }
-      }
-    }
-    .破获排名 {
-      height: px(423);
-      .legend {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        width: 100%;
-        padding: 0 px(20) px(10);
-        > .first, > .second {
-          display: inline-block;
-          width: px(18); height: px(12);
-          background: red; margin: 0 px(10);
-        }
-        .first {
-          background: linear-gradient(90deg, #2034f9 0%, #04a1ff 100%);
-        }
-        .second {
-          background: linear-gradient(90deg, #b92ae8 0%, #6773e7 100%);
         }
       }
     }

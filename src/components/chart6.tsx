@@ -1,85 +1,111 @@
 import React, {useEffect, useRef} from 'react';
 import * as echarts from 'echarts';
 import {createEchartsOptions} from '../shared/create-echarts-options';
-import china from '../geo/china.json';
+import {px} from '../shared/px';
 
 export const Chart6 = () => {
   const divRef = useRef(null);
-  const colors = {'青海省': '#BB31F7', '甘肃省': '#15B8FD', '四川省': '#06E1EE'};
+  const data = [
+    {value: 0.31, name: '黑龙江'},
+    {value: 0.27, name: '北京'},
+    {value: 0.13, name: '上海'},
+    {value: 0.05, name: '辽宁'},
+    {value: 0.05, name: '湖南'},
+    {value: 0.04, name: '江苏'},
+    {value: 0.04, name: '山东'},
+    {value: 0.04, name: '内蒙古'},
+    {value: 0.03, name: '吉林'},
+    {value: 0.02, name: '河南'},
+    {value: 0.02, name: '河北'},
+  ];
   useEffect(() => {
     var myChart = echarts.init(divRef.current);
-    // @ts-ignore
-    echarts.registerMap('CN', china);
     myChart.setOption(createEchartsOptions({
+      tooltip: {
+        show: true,
+        trigger: 'item',
+        transitionDuration: 0,
+        borderWidth: 2,
+        formatter: function (params) {
+          if (params.name === '北京') {
+            return `
+                    <div style="display:flex;align-items:center;">
+                       <span style="display:inline-block;margin-right:3px;border-radius:12px;width:6px;height:6px;
+                       background-color:${params.color};"></span>
+                          ${params.name}
+                    </div>
+                    <div>高风险地区: 2个</div>
+                    <div>中风险地区: 29个</div>
+                    `
+          } else if (params.name === '黑龙江') {
+            return `
+                    <div style="display:flex;align-items:center;">
+                       <span style="display:inline-block;margin-right:3px;border-radius:12px;width:6px;height:6px;
+                       background-color:${params.color};"></span>
+                          ${params.name}
+                    </div>
+                    <div>高风险地区: 6个</div>
+                    <div>中风险地区: 21个</div>
+                    `
+          } else {
+            return `
+                    <div style="display:flex;align-items:center;">
+                       <span style="display:inline-block;margin-right:3px;border-radius:12px;width:6px;height:6px;
+                       background-color:${params.color};"></span>
+                          ${params.name}
+                    </div>
+                    <div>中风险地区: ${params.percent}个</div>
+                    `
+          }
+        },
+        textStyle: {
+          fontSize: 10,
+        },
+        confine: true,
+        position: function (point: any[]) {
+          return [point[0], '30%'];
+        }
+      },
       xAxis: {show: false},
       yAxis: {show: false},
+      grid: {x: 0, x2: 0, y: 0, y2: 0, containLabel: true},
+      legend: {
+        orient: 'vertical',
+        left:60,
+        top: 'center',
+        textStyle: {color: 'white', fontSize: 10},
+        itemGap: 6,
+        itemWidth: px(10),
+        itemHeight: px(10),
+        formatter(name) {
+          const value = data.find(i => i.name === name)?.value * 100 + '%';
+          return name + ' ' + value;
+        }
+      },
+      color: ['#45C2E0', '#C1EBDD', '#FFC851', '#5A5476', '#1869A0',
+        '#FF9393', '#f95eae', '#f8731f', '#7c2e98', '#5bb755', '#7771d0'],
       series: [
         {
-          type: 'map',
-          mapType: 'CN', // 自定义扩展图表类型
-          data: [
-            {name: '甘肃省', value: 1},
-          ],
-          label: {show: false, color: 'white'},
-          itemStyle: {
-            areaColor: '#010D3D',
-            color: colors['甘肃省'],
-            borderColor: '#01A7F7',
-            emphasis: {
-              label: {color: 'white'},
-              areaColor: '#5470C6',
-            },
+          center: ['62%', '50%'],
+          type: 'pie',
+          radius: '80%',
+          label: {show: false},
+          labelLine: {show: false},
+          data: data,
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
           }
-        },
-        {
-          type: 'map',
-          mapType: 'CN', // 自定义扩展图表类型
-          data: [
-            {name: '四川省', value: 100},
-          ],
-          itemStyle: {
-            areaColor: '#010D3D',
-            color: colors['四川省'],
-            borderColor: 'yellow',
-            emphasis: {
-              label: {color: 'white'},
-              areaColor: '#5470C6',
-            },
-          }
-        },
-        {
-          type: 'map',
-          mapType: 'CN', // 自定义扩展图表类型
-          data: [
-            {name: '青海省', value: 100},
-          ],
-          itemStyle: {
-            areaColor: '#010D3D',
-            color: colors['青海省'],
-            borderColor: '#01A7F7',
-            emphasis: {
-              label: {color: 'white'},
-              areaColor: '#5470C6',
-            },
-          }
-        },
-
-      ]
+        }
+      ],
     }));
   }, []);
 
   return (
-    <div className="bordered 籍贯">
-      <h2>全市犯罪人员籍贯分布地</h2>
-      <div className="wrapper">
-        <div ref={divRef} className="chart"/>
-        <div className="legend bordered">
-          <span className="icon" style={{background: colors['甘肃省']}}/>甘岭籍
-          <span className="icon" style={{background: colors['四川省']}}/>边城籍
-          <span className="icon" style={{background: colors['青海省']}}/>寒国籍
-        </div>
-        <div className="notes">此地图仅显示了中国的部分区域</div>
-      </div>
+    <div ref={divRef} className="chart">
     </div>
   );
 };

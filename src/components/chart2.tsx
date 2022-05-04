@@ -1,105 +1,82 @@
 import React, {useEffect, useRef} from 'react';
 import * as echarts from 'echarts';
 import {createEchartsOptions} from '../shared/create-echarts-options';
+import {px} from '../shared/px';
 
 export const Chart2 = () => {
   const divRef = useRef(null);
-  const myChart = useRef(null);
-  const data = [
-    {name: '城关区公安局', 2011: 2, 2012: 3},
-    {name: '七里河区公安局', 2011: 2, 2012: 3},
-    {name: '西固区公安局', 2011: 2, 2012: 3},
-    {name: '安宁区公安局', 2011: 2, 2012: 3},
-    {name: '红古区公安局', 2011: 2, 2012: 3},
-    {name: '永登县公安局', 2011: 2, 2012: 3},
-    {name: '皋兰县公安局', 2011: 2, 2012: 3},
-    {name: '榆中县公安局', 2011: 2, 2012: 3},
-    {name: '新区公安局', 2011: 2, 2012: 3},
-  ];
   useEffect(() => {
-    setInterval(() => {
-      const newData = [
-        {name: '城关区公安局', 2011: 2, 2012: Math.random() * 10},
-        {name: '七里河区公安局', 2011: 2, 2012: 3},
-        {name: '西固区公安局', 2011: 2, 2012: 3},
-        {name: '安宁区公安局', 2011: 2, 2012: 3},
-        {name: '红古区公安局', 2011: 2, 2012: 3},
-        {name: '永登县公安局', 2011: 2, 2012: 3},
-        {name: '皋兰县公安局', 2011: 2, 2012: 3},
-        {name: '榆中县公安局', 2011: 2, 2012: 3},
-        {name: '新区公安局', 2011: 2, 2012: 3},
-      ];
-      x(newData);
-    }, 1000);
-  }, []);
-  const x = (data) => {
-    myChart.current.setOption(createEchartsOptions({
+    const myChart = echarts.init(divRef.current);
+    myChart.setOption(createEchartsOptions({
+      tooltip: {
+        show: true,
+        trigger: 'axis',
+        transitionDuration: 0,
+        formatter: `<div>日期: {b}</div>
+                    <div>新增境外输入: {c}例</div>`,
+        textStyle: {
+          fontSize: 10,
+        },
+        borderColor: '#ffc851',
+        borderWidth: 2,
+        confine: true,
+        position: function (point: any[]) {
+          return [point[0], '30%'];
+        }
+      },
+      grid: {
+        x: px(0),
+        x2: px(8),
+        y: px(8),
+        y2: px(14),
+        containLabel: true
+      },
       xAxis: {
-        type: 'value',
-        boundaryGap: [0, 0.01],
-        splitLine: {show: false},
-        axisLabel: {show: false}
+        type: 'category',
+        data: ['4.1', '4.2', '4.3', '4.4', '4.5', '4.6','4.7','4.8','4.9','4.10','4.11','4.12','4.13','4.14','4.15',
+          '4.16','4.17','4.18','4.19','4.20','4.21','4.22','4.23','4.24','4.25','4.26','4.27','4.28','4.29','4.30',],
+        boundaryGap: true,
+        splitLine: {show: true, lineStyle: {color: '#1e393d'}},
+        axisTick: {show: false},
+        axisLine: {show: true},
+        axisLabel:{
+          textStyle: {fontSize: 9}
+        }
       },
       yAxis: {
-        axisTick: {show: false},
-        type: 'category',
-        data: data.map(i => i.name),
-        axisLabel: {
-          formatter(val) {
-            return val.replace('公安局', '\n公安局');
-          }
+        type: 'value',
+        splitLine: {lineStyle: {color: '#1e393d'}},
+        axisLabel:{
+          textStyle: {fontSize: 9}
         }
       },
       series: [
         {
-          name: '2011年',
-          type: 'bar',
-          data: data.map(i => i[2011]),
-          itemStyle: {
-            normal: {
-              color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
-                offset: 0,
-                color: '#2034F9'
-              }, {
-                offset: 1,
-                color: '#04A1FF'
-              }]),
-            }
-          }
-        },
-        {
-          name: '2012年',
-          type: 'bar',
-          data: data.map(i => i[2012]),
-          itemStyle: {
-            normal: {
-              color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
-                offset: 0,
-                color: '#B92AE8'
-              }, {
-                offset: 1,
-                color: '#6773E7'
-              }]),
-            }
-          }
+          type: 'line',
+          data: [43, 51, 39, 62,32,39,36,16,33,20,21,13,21,14,29,25,19,19,8,11,14,17,14,14,15,6,9,13,14,4]
         }
-      ]
+      ].map(obj => ({
+        ...obj,
+        symbol: 'circle',
+        symbolSize: px(0),
+        lineStyle: {width: px(2), color: '#ffc851'},
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+            offset: 0,
+            color: '#ffc851'
+          }, {
+            offset: 1,
+            color: '#1e393d'
+          }]),
+        }
+      }))
     }));
-
-  };
-  useEffect(() => {
-    myChart.current = echarts.init(divRef.current);
-    x(data);
   }, []);
 
   return (
-    <div className="bordered 破获排名">
-      <h2>案件破获排名</h2>
+    <div className="bordered qushi">
+      <h2>近30天新增境外输入趋势</h2>
       <div ref={divRef} className="chart"/>
-      <div className="legend">
-        <span className="first"/> 破案排名1
-        <span className="second"/> 破案排名2
-      </div>
     </div>
   );
 };

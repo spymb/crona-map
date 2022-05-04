@@ -15,7 +15,13 @@ export const Chart8 = () => {
       legend: {show: false},
       series: [
         {
-          name: '访问来源',
+          data: [
+            {value: 0.07, name: '10-20'},
+            {value: 0.10, name: '20-30'},
+            {value: 0.23, name: '30-40'},
+            {value: 0.28, name: '40-50'},
+            {value: 0.32, name: '50-60'},
+          ],
           type: 'pie',
           radius: ['75%', '90%'],
           avoidLabelOverlap: false,
@@ -30,13 +36,6 @@ export const Chart8 = () => {
             borderColor: '#0F113A',
             borderWidth: px(4)
           },
-          data: [
-            {value: 0.07, name: '10-20'},
-            {value: 0.10, name: '20-30'},
-            {value: 0.23, name: '30-40'},
-            {value: 0.28, name: '40-50'},
-            {value: 0.32, name: '50-60'},
-          ]
         }
       ]
     }));

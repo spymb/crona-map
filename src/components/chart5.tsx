@@ -1,28 +1,70 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
+import * as echarts from 'echarts';
+import {createEchartsOptions} from '../shared/create-echarts-options';
 
 export const Chart5 = () => {
+  const divRef = useRef(null);
+  useEffect(() => {
+    var myChart = echarts.init(divRef.current);
+    myChart.setOption(createEchartsOptions({
+      tooltip: {
+        show: true,
+        trigger: 'item',
+        transitionDuration: 0,
+        formatter: `地区: {b}<br/>累积确诊人数: {c}`,
+        textStyle: {
+          fontSize: 10,
+        },
+        borderWidth: 2,
+        confine: true,
+        position: function (point: any[]) {
+          return [point[0], '30%'];
+        }
+      },
+      xAxis: {
+        data: ['上海', '广东', '云南','四川','福建','广西','北京','天津','浙江','陕西'],
+        axisTick: {show: false},
+        axisLine: {
+          lineStyle: {color: '#1e393d'}
+        },
+        axisLabel: {
+          interval: '0',
+          fontSize: '10',
+        }
+      },
+
+      yAxis: {
+        splitLine: {show: false},
+        axisLine: {
+          show: true,
+          lineStyle: {color: '#1e393d'}
+        },
+        axisLabel:{
+          textStyle: {fontSize: 10}
+        }
+      },
+      series: [{
+        type: 'bar',
+        data: [4583, 3838, 1489, 1309, 964, 951, 709,614,593,483],
+        itemStyle: {
+          normal:{
+            color:function(params){
+              if(params.value >= 3830){
+                return "#df3f30";
+              }
+              return "#f29d60";
+            }
+          },
+          emphasis: {
+            color: '#f9d774',
+          },
+        }
+      }]
+    }));
+  }, []);
+
   return (
-    <div className="战果">
-      <h2>往年战果数对比</h2>
-      <table>
-        <thead>
-        <tr>
-          <th>年份</th><th>破案数</th><th>抓获嫌疑人</th><th>并串案件</th><th>现勘录入</th>
-          <th>视侦录入</th><th>合成案件数</th><th>合计</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>2015</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td>
-        </tr>
-        <tr>
-          <td>2016</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td>
-        </tr>
-        <tr>
-          <td>2017</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td>
-        </tr>
-        </tbody>
-      </table>
+    <div ref={divRef} className="chart">
     </div>
   );
 };

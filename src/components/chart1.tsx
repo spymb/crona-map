@@ -1,51 +1,67 @@
-import React, {useEffect, useRef} from 'react';
-import * as echarts from 'echarts';
-import {createEchartsOptions} from '../shared/create-echarts-options';
+import React from 'react';
 
 export const Chart1 = () => {
-  const divRef = useRef(null);
-  useEffect(() => {
-    var myChart = echarts.init(divRef.current);
-    myChart.setOption(createEchartsOptions({
-      xAxis: {
-        data: ['兰州新区', '兰州新区', '兰州新区', '兰州新区', '兰州新区', '兰州新区', '兰州新区', '兰州新区', '兰州新区'],
-        axisTick: {show: false},
-        axisLine: {
-          lineStyle: {color: '#083B70'}
-        },
-        axisLabel: {
-          formatter(val) {
-            if (val.length > 2) {
-              const array = val.split('');
-              array.splice(2, 0, '\n');
-              return array.join('');
-            } else {
-              return val;
-            }
-          }
-        },
-      },
-
-      yAxis: {
-        splitLine: {show: false},
-        axisLine: {
-          show: true,
-          lineStyle: {color: '#083B70'}
-        }
-      },
-      series: [{
-        type: 'bar',
-        data: [10, 20, 36, 41, 15, 26, 37, 18, 29]
-      }]
-    }));
-  }, []);
-
   return (
-    <div className="bordered 管辖统计">
-      <h2>案发派出所管辖统计</h2>
-      <div ref={divRef} className="chart">
+    <div className="summary bordered">
+      <h2>数据汇总</h2>
+      <table>
+        <thead>
+        <tr>
+          <th>新增确诊</th>
+          <th>新增本土</th>
+          <th>新增境外</th>
+          <th>新增无症状</th>
+        </tr>
+        <tr>
+          <td className='f11'>28,973</td>
+          <td className='f12'>1,411</td>
+          <td className='f13'>14</td>
+          <td className='f14'>9,372</td>
+        </tr>
+        </thead>
 
-      </div>
+        <thead>
+        <tr>
+          <th>现有确诊</th>
+          <th>现有本土</th>
+          <th>现有境外</th>
+          <th>现有无症状</th>
+        </tr>
+        <tr>
+          <td className='f21'>389,568</td>
+          <td className='f22'>26,403</td>
+          <td className='f23'>164</td>
+          <td className='f24'>191,036</td>
+        </tr>
+        </thead>
+
+        <thead>
+        <tr>
+          <th>累积确诊</th>
+          <th>累积境外</th>
+          <th>累积治愈</th>
+          <th>累计死亡</th>
+        </tr>
+        <tr className='lastTr'>
+          <td>
+            <div className='f31'>66,230</div>
+            <span>较昨日+18,285</span>
+          </td>
+          <td>
+            <div className='f32'>18,177</div>
+            <span>较昨日+16</span>
+          </td>
+          <td>
+            <div className='f33'>257,477</div>
+            <span>较昨日+4,349</span>
+          </td>
+          <td>
+            <div className='f34'>15,185</div>
+            <span>较昨日+28</span>
+          </td>
+        </tr>
+        </thead>
+      </table>
     </div>
   );
 };

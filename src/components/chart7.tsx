@@ -8,13 +8,12 @@ export const Chart7 = () => {
   useEffect(() => {
     var myChart = echarts.init(divRef.current);
     myChart.setOption(createEchartsOptions({
-      color: ['#8D70F8', '#33A4FA'],
+      color: ['#F46064', '#33A4FA'],
       xAxis: {show: false},
       yAxis: {show: false},
       legend: {show: false},
       series: [
         {
-          name: '访问来源',
           type: 'pie',
           radius: ['75%', '90%'],
           avoidLabelOverlap: false,
