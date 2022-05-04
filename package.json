@@ -1,6 +1,7 @@
 {
   "name": "big-screen-demo-01",
   "version": "0.0.0",
+  "homepage": "https://spym.github.io/crona-map-deploy/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
