@@ -1,45 +1,43 @@
-import React, {useEffect, useRef} from 'react';
-import * as echarts from 'echarts';
-import {createEchartsOptions} from '../shared/create-echarts-options';
+import React, {useRef} from 'react';
 import {px} from '../shared/px';
+import loop from '../shared/loop-animate';
 
 export const Chart8 = () => {
   const divRef = useRef(null);
-  const colors = ['#856BED', '#F46064', '#F38E1C', '#1CDB7C', '#33A4FA'];
-  useEffect(() => {
-    var myChart = echarts.init(divRef.current);
-    myChart.setOption(createEchartsOptions({
-      color: colors,
-      xAxis: {show: false},
-      yAxis: {show: false},
-      legend: {show: false},
-      series: [
-        {
-          data: [
-            {value: 0.07, name: '10-20'},
-            {value: 0.10, name: '20-30'},
-            {value: 0.23, name: '30-40'},
-            {value: 0.28, name: '40-50'},
-            {value: 0.32, name: '50-60'},
-          ],
-          type: 'pie',
-          radius: ['75%', '90%'],
-          avoidLabelOverlap: false,
-          label: {
-            show: true, position: 'inside', textStyle: {color: 'white', fontSize: px(20)},
-            formatter(options) {
-              return (options.value * 100).toFixed(0) + '%';
-            }
-          },
-          labelLine: {show: false},
-          itemStyle: {
-            borderColor: '#0F113A',
-            borderWidth: px(4)
-          },
-        }
-      ]
-    }));
-  }, []);
+  const colors = ['#856BED', '#F46064', '#F38E1C', '#1CDB7C', '#33A4FA']
+  const options = {
+    color: colors,
+    xAxis: {show: false},
+    yAxis: {show: false},
+    legend: {show: false},
+    series: [
+      {
+        data: [
+          {value: 0.07, name: '10-20'},
+          {value: 0.10, name: '20-30'},
+          {value: 0.23, name: '30-40'},
+          {value: 0.28, name: '40-50'},
+          {value: 0.32, name: '50-60'},
+        ],
+        type: 'pie',
+        radius: ['75%', '90%'],
+        avoidLabelOverlap: false,
+        label: {
+          show: true, position: 'inside', textStyle: {color: 'white', fontSize: px(20)},
+          formatter(options) {
+            return (options.value * 100).toFixed(0) + '%';
+          }
+        },
+        labelLine: {show: false},
+        itemStyle: {
+          borderColor: '#0F113A',
+          borderWidth: px(4)
+        },
+      }
+    ]
+  }
+
+  loop(divRef, options)
 
   return (
     <div className="年龄段-图2">

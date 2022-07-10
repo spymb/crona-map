@@ -1,41 +1,39 @@
-import React, {useEffect, useRef} from 'react';
-import * as echarts from 'echarts';
-import {createEchartsOptions} from '../shared/create-echarts-options';
+import React, {useRef} from 'react';
 import {px} from '../shared/px';
+import loop from '../shared/loop-animate';
 
 export const Chart7 = () => {
   const divRef = useRef(null);
-  useEffect(() => {
-    var myChart = echarts.init(divRef.current);
-    myChart.setOption(createEchartsOptions({
-      color: ['#F46064', '#33A4FA'],
-      xAxis: {show: false},
-      yAxis: {show: false},
-      legend: {show: false},
-      series: [
-        {
-          type: 'pie',
-          radius: ['75%', '90%'],
-          avoidLabelOverlap: false,
-          label: {
-            show: true, position: 'inside', textStyle: {color: 'white', fontSize: px(20)},
-            formatter(options) {
-              return options.value * 100 + '%';
-            }
-          },
-          labelLine: {show: false},
-          itemStyle: {
-            borderColor: '#0F113A',
-            borderWidth: px(4)
-          },
-          data: [
-            {value: 0.2, name: '女'},
-            {value: 0.8, name: '男'},
-          ]
-        }
-      ]
-    }));
-  }, []);
+  const options = {
+    color: ['#F46064', '#33A4FA'],
+    xAxis: {show: false},
+    yAxis: {show: false},
+    legend: {show: false},
+    series: [
+      {
+        type: 'pie',
+        radius: ['75%', '90%'],
+        avoidLabelOverlap: false,
+        label: {
+          show: true, position: 'inside', textStyle: {color: 'white', fontSize: px(20)},
+          formatter(options) {
+            return options.value * 100 + '%';
+          }
+        },
+        labelLine: {show: false},
+        itemStyle: {
+          borderColor: '#0F113A',
+          borderWidth: px(4)
+        },
+        data: [
+          {value: 0.46, name: '女'},
+          {value: 0.54, name: '男'},
+        ]
+      }
+    ]
+  }
+
+  loop(divRef, options)
 
   return (
     <div className="年龄段-图1">

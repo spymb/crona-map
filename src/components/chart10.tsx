@@ -5,6 +5,7 @@ import china from '../geo/china.json';
 
 export const Chart10 = () => {
   const divRef = useRef(null);
+
   useEffect(() => {
     var myChart = echarts.init(divRef.current);
     // @ts-ignore

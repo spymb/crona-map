@@ -7,6 +7,7 @@ export const Clock = () => {
     const dater = document.createElement('div');
     clock.appendChild(timer);
     clock.appendChild(dater);
+
     const step = () => {
       setTimeout(() => {
         const time = new Date();
@@ -40,6 +41,7 @@ export const Clock = () => {
           6: '周六',
           0: '周日'
         };
+
         minute < 10
           ? second < 10
             ? (timer.innerHTML = hour + ':0' + minute + ':0' + second)
@@ -48,11 +50,16 @@ export const Clock = () => {
             ? (timer.innerHTML = hour + ':' + minute + ':0' + second)
             : (timer.innerHTML = hour + ':' + minute + ':' + second);
         dater.innerHTML = year+ '年' + monthMap[month] + date + '日' + ', ' + dayMap[day];
+
         step();
+
       }, 1000);
     };
+
     step();
+
   }, []);
+
   return (
     <div className="clock"/>
   );
